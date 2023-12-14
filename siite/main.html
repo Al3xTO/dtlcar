@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервіс детейлінгу авто</title>
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin-bottom: 0;
+            background: url('https://img.badfon.ru/wallpaper/big/4/d9/lamborghini-gallardo-chernyy.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 0.5em;
+            position: relative;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1em;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 2;
+            font-size: 70px;
+        }
+
+        .copied-notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            animation: fadeOut 1s ease-in-out;
+        }
+
+        .textinbox {
+            position: relative;
+            top: -5px;
+        }
+
+        .close-icon {
+            position: absolute;
+            top: -20px;
+            right: -16px;
+            font-size: 24px;
+            font-weight: normal;
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+        }
+
+        .phone-icon {
+            font-size: 24px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .email-icon {
+            font-size: 24px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        header:hover nav {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        header:hover nav:hover {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        footer p {
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        footer .address {
+            display: block;
+            margin-top: 10px;
+            color: #fff;
+            text-decoration: none; /* Убирает подчеркивание для ссылок */
+        }
+
+        p.services {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .menu-icon {
+            color: #fff; /* Колір іконки в білий */
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            bottom: 50px;
+            right: 0;
+            padding: 20px;
+            background-color: #2d2c2c;
+            border: 1px solid #ccc;
+        }
+
+        #popup input {
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #name,
+        #nickname,
+        #phone {
+            text-align: left;
+            opacity: 0.5;
+        }
+
+        #popup button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <h1><a href="main.html" style="color: #fff; text-decoration: none;">Detailing Car UA</a></h1>
+        <nav>
+            <ul>
+                <li><a href="about.html">Про нас</a></li>
+                <li><a href="services.html">Послуги</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <p>Вітаємо у світі бездоганного догляду за вашим автомобілем!</p>
+        <h2>Наші послуги:</h2>
+        <ul>
+            <li><strong>Миття кузова:</strong> Відновлення блиску та бездоганності вашого авто. Наші фахівці
+                використовують передові технології, щоб кожна деталь сяяла.</li>
+            <li><strong>Полірування:</strong> Професійне полірування для захисту лакофарбового покриття від зовнішніх
+                впливів та забезпечення довготривалого блиску.</li>
+            <li><strong>Чистка салону:</strong> Комплексна забота про ваш комфорт всередині автомобіля. Відновлення
+                свіжості та бездоганності салону.</li>
+        </ul>
+        <p style="margin-top: 20px;"></p>
+        <p style="margin-top: 20px;"><strong style="font-weight: bold; font-size: 24px;">Чекаемо вашего
+                дзвінка</strong><br>ПН-ПТ 09:00 - 17:00<br>СБ-ВС 10:00 - 14:00</p>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="about.html">Про нас</a></li>
+                <li><a href="services.html">Послуги</a></li>
+            </ul>
+        </nav>
+        <p onclick="copyToClipboard('+380-(96)-111-11-11')"><span class="phone-icon">&#9742;</span>Телефон:
+            +380-(96)-111-11-11</p> |
+        <p onclick="copyToClipboard('car.detailing46@gmail.com')"><span class="email-icon">&#9993;</span>Електронна
+            пошта: car.detailing46@gmail.com</p><br></br>
+            <p><a class="address" href="https://www.google.com/maps/place/BroDrift+Car+Wrapping+-+%D1%81%D1%82%D1%83%D0%B4%D1%96%D1%8F+%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%D0%BB%D0%B8%D0%BD%D0%B3%D1%83,+%D0%BE%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B0+%D0%B0%D0%B2%D1%82%D0%BE+%D0%BF%D0%BB%D1%96%D0%B2%D0%BA%D0%BE%D1%8E,+%D1%82%D0%BE%D0%BD%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1%8F,+%D1%85%D1%96%D0%BC%D1%87%D0%B8%D1%81%D1%82%D0%BA%D0%B0./@50.4389102,30.6152909,20.29z/data=!4m15!1m8!3m7!1s0x40d4c5676043cedb:0x28f3fa861c45beb6!2z0L_RgNC-0YHQv9C10LrRgiDQodC-0LHQvtGA0L3QvtGB0YLRliwgMTUsINCa0LjRl9CyLCDQo9C60YDQsNC40L3QsCwgMDIwMDA!3b1!8m2!3d50.4381289!4d30.6150318!16s%2Fg%2F1tkqysjp!3m5!1s0x40d4cdc4c158612f:0x2e4ddbf32c8f676e!8m2!3d50.4389145!4d30.6154188!16s%2Fg%2F11hzymr5tv?entry=ttu">Адреса: проспект Соборності 15, м. Київ</a></p>
+    </footer>
+
+    <div id="copiedNotification" class="copied-notification">Скопійовано</div>
+
+    <div id="sentNotification" class="copied-notification">Відправлено</div>
+
+    <div id="popup">
+        <div class="textinbox">Подзвоніть мені!<span class="close-icon" onclick="closeForm()">&times;</span></div>
+        <div>
+            <input type="text" id="name" oninput="handleInput(this)" placeholder="Ваше ім'я*">
+        </div>
+        <div>
+            <input type="text" id="nickname" oninput="handleInput(this)" placeholder="Ваше призвіще або нік">
+        </div>
+        <div>
+            <input type="tel" id="phone" oninput="handleInput(this)" placeholder="Ваш номер телефону" maxlength="17">
+        </div>
+        <div>
+            <button onclick="submitForm()">Відправити</button>
+        </div>
+    </div>
+
+    <script>
+        function closeForm() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+        function toggleMenu() {
+            var nav = document.querySelector('nav');
+            nav.style.visibility = (nav.style.visibility === 'visible') ? 'hidden' : 'visible';
+            nav.style.opacity = (nav.style.opacity === '1') ? '0' : '1';
+        }
+
+        function copyToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            var copiedNotification = document.getElementById('copiedNotification');
+            copiedNotification.style.display = 'block';
+            setTimeout(function () {
+                copiedNotification.style.display = 'none';
+            }, 1000);
+        }
+
+        function submitForm() {
+            var name = document.getElementById('name').value;
+            var nickname = document.getElementById('nickname').value;
+            var phone = document.getElementById('phone').value;
+
+            // Перевірка обов'язкових полів
+            if (name.trim() === '' || phone.trim() === '') {
+                // Повідомлення "Не всі обов'язкові дані було введено"
+                var notFilledNotification = document.getElementById('copiedNotification');
+                notFilledNotification.innerHTML = "Не всі обов'язкові дані було введено";
+                notFilledNotification.style.display = 'block';
+                setTimeout(function () {
+                    notFilledNotification.style.display = 'none';
+                }, 3000);
+            } else {
+                // Перевірка телефонного номеру
+                var phoneRegex = /^[0-9]{9,12}$/;
+                if (!phone.match(phoneRegex)) {
+                    // Повідомлення про невірний номер
+                    var invalidPhoneNotification = document.getElementById('copiedNotification');
+                    invalidPhoneNotification.innerHTML = "Введено невірний номер телефону";
+                    invalidPhoneNotification.style.display = 'block';
+                    setTimeout(function () {
+                        invalidPhoneNotification.style.display = 'none';
+                    }, 3000);
+                } else {
+                    // Якщо всі дані введено правильно, показати повідомлення "відправлено"
+                    var sentNotification = document.getElementById('copiedNotification');
+                    sentNotification.innerHTML = "Відправлено";
+                    sentNotification.style.display = 'block';
+                    setTimeout(function () {
+                        sentNotification.style.display = 'none';
+                    }, 3000);
+
+                    // Тут ви можете використовувати значення полів для подальшої обробки (наприклад, відправка на сервер)
+
+                    // Закрити форму після відправки
+                    closeForm();
+                }
+            }
+        }
+
+        document.addEventListener("scroll", function () {
+            var header = document.querySelector("header");
+            var scrolled = window.scrollY > 0;
+            header.classList.toggle("scrolled", scrolled);
+        });
+
+        function handleInput(element) {
+            if (element.value) {
+                element.style.opacity = 1;
+            } else {
+                element.style.opacity = 0.5;
+            }
+        }
+
+        function showPopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+
+        setTimeout(showPopup, 20000);
+
+        document.getElementById('name').addEventListener('focus', function () {
+            this.placeholder = '';
+        });
+
+        document.getElementById('nickname').addEventListener('focus', function () {
+            this.placeholder = '';
+        });
+
+        document.getElementById('phone').addEventListener('focus', function () {
+            this.placeholder = '';
+        });
+
+    </script>
+
+</body>
+
+</html>
